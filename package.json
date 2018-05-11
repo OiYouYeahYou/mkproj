@@ -13,7 +13,7 @@
 	"author": "Jason Allan",
 	"license": "MIT",
 	"bin": {
-		"mkproj": "./lib/index.js"
+		"mkproj": "./bin/cli.js"
 	},
 	"bugs": {
 		"url": "https://github.com/OiYouYeahYou/mkproj/issues"
@@ -22,7 +22,8 @@
 	"dependencies": {
 		"co": "^4.6.0",
 		"co-prompt": "^1.0.0",
-		"commander": "^2.15.1"
+		"commander": "^2.15.1",
+		"simple-git": "^1.92.0"
 	},
 	"devDependencies": {
 		"@types/dotenv": "^4.0.3",
