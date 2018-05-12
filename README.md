@@ -1,22 +1,25 @@
 ## Planned actions
 
-* mkdir
-* git init
-* npm init
-* add
-  * gitignore
-  * readme
-  * gulp
-  * tslint
-  * prettier config
-* install
-  * @types/dotenv
-  * @types/node
-  * del
-  * gulp
-  * gulp-sourcemaps
-  * gulp-tslint
-  * gulp-typescript
-  * tslint
-  * typescript
-  * * Any other packages
+* [x] mkdir
+* [x] git init
+* [ ] npm init
+* [ ] add
+  * [ ] gitignore
+  * [ ] readme
+  * [ ] gulp
+  * [ ] tslint
+  * [ ] prettier config
+  * [ ] contributer
+* [x] install
+  * [x] @types/dotenv
+  * [x] @types/node
+  * [x] del
+  * [x] gulp
+  * [x] gulp-sourcemaps
+  * [x] gulp-tslint
+  * [x] gulp-typescript
+  * [x] tslint
+  * [x] typescript
+  * [x] * Any other packages
+* [ ] init commit
+* [ ] Publish to gh
