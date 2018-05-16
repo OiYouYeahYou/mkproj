@@ -3,6 +3,8 @@
 		"types": ["node"],
 		"target": "es6",
 		"module": "commonjs",
-		"lib": ["es6"]
-	}
+		"lib": ["es6"],
+		"noUnusedLocals": true
+	},
+	"exclude": ["node_modules"]
 }
