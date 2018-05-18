@@ -1,14 +1,23 @@
 import { cfg } from '.'
-import co from 'co'
 import * as coPrompt from 'co-prompt'
 import { Validationinfo } from './validators'
 
 type validationFn = (value: string) => Validationinfo
+type defaultGenerator = () => string
 
-export function* prompt(
-	key: string,
+interface PromptConfig {
+	key: string
+	prompt: string
 	validator?: validationFn
-): Iterable<string> {
+	defaultValueMaker?: defaultGenerator
+}
+
+export function* prompt({
+	key,
+	validator,
+	prompt,
+	defaultValueMaker,
+}: PromptConfig): Iterable<string> {
 	const { preExistingValue, isConfig, isArgument } = cfg.checkPreExistingData(
 		key
 	)
@@ -18,8 +27,16 @@ export function* prompt(
 	}
 
 	while (true) {
-		const defaultInfo = isConfig ? ` [${preExistingValue}]` : ''
-		const promptResult = yield coPrompt(`${key}${defaultInfo}: `)
+		const defaultValue =
+			typeof defaultValueMaker === 'function'
+				? defaultValueMaker()
+				: undefined
+		const defaultInfo =
+			isConfig || defaultValue
+				? ` [${defaultValueMaker || preExistingValue}]`
+				: ''
+		const promptString = `${prompt || key}${defaultInfo}: `
+		const promptResult = yield coPrompt(promptString)
 		const value = processPromptValue(
 			promptResult,
 			isConfig,
@@ -70,7 +87,7 @@ function processPromptValue(
 	return present ? preExistingValue : ''
 }
 
-function callValidator(validator: validationFn, value: string): boolean {
+function callValidator(validator: validationFn | void, value: string): boolean {
 	if (typeof validator !== 'function') return true
 	const { isValid, message } = validator(value)
 	if (!isValid) console.log(message)

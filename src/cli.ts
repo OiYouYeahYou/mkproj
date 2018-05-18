@@ -5,6 +5,9 @@ import { prompt, boolPrompt } from './prompts'
 import { nameValidator, licenseValidator } from './validators'
 import { join } from 'path'
 import { makeProject } from './makeProject'
+import { randomName } from './name'
+
+require('./name')
 
 co(function*() {
 	const config: Config = yield makeConfig()
@@ -16,11 +19,29 @@ co(function*() {
 	.then(() => process.exit())
 
 function* makeConfig(): Iterable<Config> {
-	const name = yield prompt('project-name', nameValidator)
-	const license = yield prompt('license', licenseValidator)
-	const user = yield prompt('user')
-	const description = yield prompt('info')
-	const dependencies = yield prompt('dependencies')
+	const name = yield prompt({
+		key: 'project-name',
+		prompt: 'Project name',
+		validator: nameValidator,
+		defaultValueMaker: () => randomName(),
+	})
+	const license = yield prompt({
+		key: 'license',
+		prompt: 'license',
+		validator: licenseValidator,
+	})
+	const user = yield prompt({
+		key: 'user',
+		prompt: 'user',
+	})
+	const description = yield prompt({
+		key: 'info',
+		prompt: 'info',
+	})
+	const dependencies = yield prompt({
+		key: 'dependencies',
+		prompt: 'dependencies',
+	})
 	const publish = yield boolPrompt('publish')
 	const commit = yield boolPrompt('commit')
 
