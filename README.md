@@ -1,28 +1,28 @@
 ## Planned actions
 
-* [x] mkdir
-* [x] git init
-* [ ] npm init
-* [ ] add
-  * [ ] gitignore
-  * [ ] readme
-  * [ ] gulp
-  * [ ] tslint
-  * [ ] prettier config
-  * [ ] contributer
-* [x] install
-  * [x] @types/dotenv
-  * [x] @types/node
-  * [x] del
-  * [x] gulp
-  * [x] gulp-sourcemaps
-  * [x] gulp-tslint
-  * [x] gulp-typescript
-  * [x] tslint
-  * [x] typescript
-  * [x] * Any other packages
-* [ ] init commit
-* [ ] Publish to gh
+*   [x] mkdir
+*   [x] git init
+*   [x] npm init
+*   [ ] add
+    *   [x] gitignore
+    *   [x] readme
+    *   [x] gulp
+    *   [x] tslint
+    *   [x] prettier config
+    *   [ ] contributer
+*   [x] install
+    *   [x] @types/dotenv
+    *   [x] @types/node
+    *   [x] del
+    *   [x] gulp
+    *   [x] gulp-sourcemaps
+    *   [x] gulp-tslint
+    *   [x] gulp-typescript
+    *   [x] tslint
+    *   [x] typescript
+    *   [x] *   Any other packages
+*   [ ] init commit
+*   [ ] Publish to gh
 
 _prepublish_: Run BEFORE the package is packed and published, as well as on local npm install without any arguments. (See below)
 _prepare_: Run both BEFORE the package is packed and published, and on local npm install without any arguments (See below). This is run AFTER prepublish, but BEFORE prepublishOnly.

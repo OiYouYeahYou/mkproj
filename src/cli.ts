@@ -6,6 +6,12 @@ import { nameValidator, licenseValidator } from './validators'
 import { join } from 'path'
 import { makeProject } from './makeProject'
 import { randomName } from './name'
+import {
+	trim,
+	removeDoubleWhitespace,
+	replaceSpaceWithDash,
+} from './util/stringOperators'
+import { piper } from './util/piper'
 
 require('./name')
 
@@ -23,25 +29,16 @@ function* makeConfig(): Iterable<Config> {
 		key: 'project-name',
 		prompt: 'Project name',
 		validator: nameValidator,
-		defaultValueMaker: () => randomName(),
+		defaultValueMaker: randomName,
+		sanitiser: piper(trim, removeDoubleWhitespace, replaceSpaceWithDash),
 	})
 	const license = yield prompt({
 		key: 'license',
-		prompt: 'license',
 		validator: licenseValidator,
 	})
-	const user = yield prompt({
-		key: 'user',
-		prompt: 'user',
-	})
-	const description = yield prompt({
-		key: 'info',
-		prompt: 'info',
-	})
-	const dependencies = yield prompt({
-		key: 'dependencies',
-		prompt: 'dependencies',
-	})
+	const user = yield prompt({ key: 'user' })
+	const description = yield prompt({ key: 'info' })
+	const dependencies = yield prompt({ key: 'dependencies' })
 	const publish = yield boolPrompt('publish')
 	const commit = yield boolPrompt('commit')
 

@@ -7,9 +7,10 @@ type defaultGenerator = () => string
 
 interface PromptConfig {
 	key: string
-	prompt: string
+	prompt?: string
 	validator?: validationFn
 	defaultValueMaker?: defaultGenerator
+	sanitiser?: (value: string) => string
 }
 
 export function* prompt({
@@ -17,6 +18,7 @@ export function* prompt({
 	validator,
 	prompt,
 	defaultValueMaker,
+	sanitiser,
 }: PromptConfig): Iterable<string> {
 	const { preExistingValue, isConfig, isArgument } = cfg.checkPreExistingData(
 		key
@@ -33,17 +35,19 @@ export function* prompt({
 				: undefined
 		const defaultInfo =
 			isConfig || defaultValue
-				? ` [${defaultValueMaker || preExistingValue}]`
+				? ` [${defaultValue || preExistingValue}]`
 				: ''
 		const promptString = `${prompt || key}${defaultInfo}: `
 		const promptResult = yield coPrompt(promptString)
 		const value = processPromptValue(
 			promptResult,
 			isConfig,
-			preExistingValue
+			preExistingValue,
+			defaultValue
 		)
 
-		if (callValidator(validator, value)) return value
+		if (callValidator(validator, value))
+			return sanitiser ? sanitiser(value) : value
 	}
 }
 
@@ -81,10 +85,11 @@ export function* boolPrompt(key: string): Iterable<boolean> {
 function processPromptValue(
 	value: string,
 	present: boolean,
-	preExistingValue: string
+	preExistingValue: string,
+	defaultValue: string
 ) {
 	if (value) return value
-	return present ? preExistingValue : ''
+	return present || defaultValue ? defaultValue || preExistingValue : ''
 }
 
 function callValidator(validator: validationFn | void, value: string): boolean {
