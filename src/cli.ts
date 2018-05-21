@@ -39,8 +39,6 @@ function* makeConfig(): Iterable<Config> {
 	const user = yield prompt({ key: 'user' })
 	const description = yield prompt({ key: 'info' })
 	const dependencies = yield prompt({ key: 'dependencies' })
-	const publish = yield boolPrompt('publish')
-	const commit = yield boolPrompt('commit')
 
 	const target = join(process.cwd(), name)
 
@@ -52,8 +50,6 @@ function* makeConfig(): Iterable<Config> {
 		target,
 		description,
 		pkg,
-		publish,
-		commit,
 		dependencies,
 		user,
 	}

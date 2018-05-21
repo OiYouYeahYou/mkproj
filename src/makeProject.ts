@@ -12,7 +12,7 @@ export async function makeProject(config: Config) {
 
 	log(`making directory: ${target}`)
 	mkdirSync(target)
-	mkdirSync(target + 'src')
+	mkdirSync(join(target, 'src'))
 	process.chdir(target)
 	const repo = git(target)
 	// @ts-ignore untyped method
@@ -31,6 +31,10 @@ export async function makeProject(config: Config) {
 
 	safeExec(`code ${target}`, 'failed to open VS Code')
 	safeExec(`github open ${target}`, 'failed to open github')
+
+	await repo.add('.')
+	// @ts-ignore Untyped method awaiting PR approval
+	await repo.commit('init commit')
 }
 
 function writeJSON(filename: string, data: any, indent?: number | '\t') {

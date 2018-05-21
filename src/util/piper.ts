@@ -1,11 +1,7 @@
-export function piper<T>(handlers: ((value: T) => T)[]): (value: T) => T {
-	return function(value: T) {
-		let r = value
-
-		for (const handler of handlers) {
-			r = handler(r)
-		}
-
-		return r
-	}
+export function piper<T>(...handlers: ((value: T) => T)[]): (value: T) => T {
+	return value =>
+		handlers.reduce(
+			(previousValue, handler) => handler(previousValue),
+			value
+		)
 }

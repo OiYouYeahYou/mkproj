@@ -1,3 +1,35 @@
+## Make Project
+
+`mkproj` a tool to rapidly make project, saving the time of setting up the structure for every project
+
+## Installation
+
+```shell
+git clone https://github.com/OiYouYeahYou/mkproj.git
+cd mkproj
+sudo npm i -g
+```
+
+## Usage
+
+```shell
+mkproj
+
+
+  Usage: mkproj [options] <file>
+
+  Options:
+
+    -V, --version              output the version number
+    -D, --dry                  Make config, but do not act
+    -v, --verbose              Verbosity
+    -i, --indent <indent>      Indentation to use
+    -n, --name <project-name>
+    -d, --description <info>
+    -l, --license <license>
+    -h, --help                 output usage information
+```
+
 ## Planned actions
 
 *   [x] mkdir
@@ -9,7 +41,7 @@
     *   [x] gulp
     *   [x] tslint
     *   [x] prettier config
-    *   [ ] contributer
+    *   [ ] contributor
 *   [x] install
     *   [x] @types/dotenv
     *   [x] @types/node
@@ -21,8 +53,8 @@
     *   [x] tslint
     *   [x] typescript
     *   [x] *   Any other packages
-*   [ ] init commit
-*   [ ] Publish to gh
+*   [x] init commit
+*   ~~[ ] Publish to gh~~
 
 _prepublish_: Run BEFORE the package is packed and published, as well as on local npm install without any arguments. (See below)
 _prepare_: Run both BEFORE the package is packed and published, and on local npm install without any arguments (See below). This is run AFTER prepublish, but BEFORE prepublishOnly.
