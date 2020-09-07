@@ -1,7 +1,7 @@
 import program from './program'
 import co from 'co'
 import { Config } from '.'
-import { prompt, boolPrompt } from './prompts'
+import { prompt } from './prompts'
 import { nameValidator, licenseValidator } from './validators'
 import { join } from 'path'
 import { makeProject } from './makeProject'
@@ -72,6 +72,7 @@ function pkgMaker(
 			postinstall: '',
 			lint:
 				'prettier ./src/*.ts --write && tslint --fix -p ./tsconfig.json',
+			dev: 'nodemon -e .ts --exec gulp',
 		},
 		dependencies: {},
 		repository: {
